@@ -179,7 +179,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		4D9E8F19520EBE17203ABD1E2A98BED8 /* Debug */ = {
+		38F624EEE8268006A5D080E25F3310F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E48FDA66EBFF4EA430697B978CD25565 /* Pods-News.debug.xcconfig */;
 			buildSettings = {
@@ -193,6 +193,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "Target Support Files/Pods-News/Pods-News-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
@@ -344,7 +346,7 @@
 			};
 			name = Release;
 		};
-		B9CFE4905A589436C48AE37DF5E55BC1 /* Release */ = {
+		91FF7F546DFEEEE506FFD39077FD942E /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 355E8FCF6A558F397CCF4CE5D339860D /* Pods-News.release.xcconfig */;
 			buildSettings = {
@@ -358,6 +360,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "Target Support Files/Pods-News/Pods-News-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
@@ -397,8 +401,8 @@
 		71A378154A91BF1DF3BBB6415578B5D9 /* Build configuration list for PBXNativeTarget "Pods-News" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D9E8F19520EBE17203ABD1E2A98BED8 /* Debug */,
-				B9CFE4905A589436C48AE37DF5E55BC1 /* Release */,
+				38F624EEE8268006A5D080E25F3310F8 /* Debug */,
+				91FF7F546DFEEEE506FFD39077FD942E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

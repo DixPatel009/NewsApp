@@ -6,5 +6,7 @@ target 'News' do
   use_frameworks!
 
   # Pods for News
+  
+  pod 'IQKeyboardManagerSwift'
 
 end

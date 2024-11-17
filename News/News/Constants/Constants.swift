@@ -11,4 +11,14 @@ struct Constants {
         static let apiKey = "api_key"
     }
     
+    struct NavigationMenu {
+        
+        struct Ids {
+            static let search = "search"
+            static let favorites = "favorites"
+            static let settings = "settings"
+        }
+        
+    }
+    
 }

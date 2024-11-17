@@ -13,6 +13,7 @@ struct UI {
         static let backGroundColor = UIColor.with(red: 12, green: 12, blue: 12)
         static let darkGray = UIColor.with(red: 128, green: 128, blue: 128)
         static let white = UIColor.white
+        static let coreBlue = UIColor.with(red: 0, green: 255, blue: 235)
     }
     
     struct Layer {

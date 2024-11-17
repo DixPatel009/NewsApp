@@ -58,7 +58,9 @@ extension AppDelegate {
     }
     
     private func configureMainViewController() {
-        print("Main Screen")
+        DispatchQueue.main.async {
+            self.window!.rootViewController = TabViewController()
+        }
     }
         
 }

@@ -9,10 +9,22 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    // MARK: - View LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .red
+        self.setUpView()
     }
 
+}
+
+// MARK: - Setup
+
+extension SettingsViewController {
+    
+    private func setUpView() {
+        self.view.backgroundColor = UI.Colors.backGroundColor
+    }
+    
 }

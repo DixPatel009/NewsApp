@@ -16,4 +16,12 @@ extension UIView {
         self.center = center
         clipsToBounds = true
     }
+    
+    // Centering Subview
+    func center(subview: UIView) {
+        guard subviews.contains(subview) else { return }
+        subview.translatesAutoresizingMaskIntoConstraints = false
+        subview.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        subview.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
 }

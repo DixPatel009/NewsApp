@@ -7,4 +7,9 @@ struct Strings {
         static let settings = "Settings"
     }
     
+    struct AlertMessage {
+        static let searchMinimumLimit = "Search text must be at leasr 3 charcaters long."
+        static let warning = "Warning"
+    }
+    
 }

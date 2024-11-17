@@ -8,5 +8,7 @@ target 'News' do
   # Pods for News
   
   pod 'IQKeyboardManagerSwift'
+  pod 'Alamofire'
+  pod 'SDWebImage'
 
 end

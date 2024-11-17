@@ -12,4 +12,9 @@ struct Images {
         static let favorites = "favorite"
         static let settings = "settings"
     }
+    
+    struct Placeholders {
+        static let newsFallBack = "newsFallBack"
+    }
+
 }

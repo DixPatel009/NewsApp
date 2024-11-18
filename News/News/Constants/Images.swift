@@ -14,7 +14,8 @@ struct Images {
     }
     
     struct Placeholders {
-        static let newsFallBack = "newsFallBack"
+        static let newsFallBack = "fallBack"
     }
 
+    static let back = "back"
 }

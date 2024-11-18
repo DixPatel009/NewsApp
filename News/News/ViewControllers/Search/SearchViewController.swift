@@ -129,6 +129,8 @@ extension SearchViewController {
     }
 }
 
+// MARK: - UICollectionView Delegate, DataSource, FlowLayout Delegate
+
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -138,7 +140,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let identifier = self.isGridLayout ? gridCellIdentifiers : cellIdentifiers
         let cell: NewsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! NewsCollectionViewCell
-        let article = viewModel.article(at: indexPath.row)
+        let article = viewModel.article(at: indexPath.item)
         cell.populate(with: article)
         return cell
         
@@ -152,6 +154,25 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let viewController = NewsDetailViewController(article: viewModel.article(at: indexPath.item))
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let favoriteAction = UIContextualAction(style: .normal, title: "Favorite") { (action, view, completionHandler) in
+//            // Mark the article as favorite
+//            //self.viewModel.favoriteArticle(at: indexPath.row)
+//            completionHandler(true)
+//        }
+//        favoriteAction.backgroundColor = .systemBlue
+//        
+//        return UISwipeActionsConfiguration(actions: [favoriteAction])
+//    }
 }
 
 // MARK: - IBAction
@@ -207,6 +228,8 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
 }
+
+// MARK: - UIScrollView Delegate
 
 extension SearchViewController: UIScrollViewDelegate {
     

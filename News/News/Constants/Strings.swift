@@ -12,4 +12,7 @@ struct Strings {
         static let warning = "Warning"
     }
     
+    struct dateFrormatter {
+        static let yyyyMMdd = "yyyy-MM-dd"
+    }
 }

@@ -12,7 +12,7 @@ protocol NewsRepositoryProtocol {
                    fromDate: String?,
                    toDate: String?,
                    page: Int,
-                   completion: @escaping (Result<[Article], APIError>) -> Void)
+                   completion: @escaping (Result<([Article], URLRequest?), APIError>) -> Void)
 }
 
 class NewsRepository: NewsRepositoryProtocol {
@@ -21,7 +21,7 @@ class NewsRepository: NewsRepositoryProtocol {
                    fromDate: String?,
                    toDate: String?,
                    page: Int,
-                   completion: @escaping (Result<[Article], APIError>) -> Void) {
+                   completion: @escaping (Result<([Article], URLRequest?), APIError>) -> Void) {
         
         let viewModel = KeychainViewModel()
         guard let apiKey = viewModel.fetchData(forKey: Constants.KeychainKey.apiKey),
@@ -32,7 +32,6 @@ class NewsRepository: NewsRepositoryProtocol {
         
         var parameters: [String: String] = [
             "q": query,
-            "sortBy": "popularity",
             "apiKey": apiKey,
             "page": "\(page)"
         ]
@@ -43,17 +42,20 @@ class NewsRepository: NewsRepositoryProtocol {
         
         if let toDate = toDate {
             parameters["to"] = toDate
+        } else {
+            parameters["to"] = Date().stringFromDate()
         }
         
+        print(parameters)
         APIManager.shared.request(
             url: API.baseURL,
             method: .get,
             parameters: parameters,
             headers: nil
-        ) { (result: Result<NewsResponse, APIError>) in
+        ) { (result: Result<(NewsResponse, URLRequest?), APIError>) in
             switch result {
-            case .success(let newsResponse):
-                completion(.success(newsResponse.articles))
+            case .success((let newsResponse, let request)):
+                completion(.success((newsResponse.articles, request)))
             case .failure(let error):
                 completion(.failure(error))
             }

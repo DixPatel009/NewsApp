@@ -61,6 +61,7 @@ extension LoginViewController {
 extension LoginViewController {
     
     @IBAction func LoginButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
         self.saveKeyInLocalStorage()
     }
     

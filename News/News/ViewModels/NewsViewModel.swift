@@ -13,6 +13,7 @@ class NewsViewModel {
     private(set) var articles: [Article] = []
     private var currentPage = 1
     private var isLoading = false
+    private var requestURL: String?
 
     var onNewsFetched: (() -> Void)?
     var onError: ((String) -> Void)?
@@ -42,9 +43,10 @@ class NewsViewModel {
             guard let self = self else { return }
             self.isLoading = false
             switch result {
-            case .success(let newArticles):
+            case .success((let newArticles, let request)):
                 let filteredArticles = newArticles.filter { $0.title.lowercased() != "[removed]" }
                 self.articles.append(contentsOf: filteredArticles)
+                self.requestURL = request?.url?.absoluteString
                 self.currentPage += 1  // Increment page for next fetch
                 self.onNewsFetched?()
             case .failure(let error):
@@ -61,4 +63,6 @@ class NewsViewModel {
     func article(at index: Int) -> Article {
         return articles[index]
     }
+    
+    
 }

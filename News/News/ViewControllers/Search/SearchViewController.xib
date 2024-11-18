@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,6 +11,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="News" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="M1q-QE-rhc" id="i6E-ae-Huu"/>
+                <outlet property="fromDateButton" destination="mEd-Tz-OUK" id="yqS-cg-VyU"/>
+                <outlet property="noDataView" destination="PFN-U9-WRi" id="Tfl-5F-LyY"/>
                 <outlet property="searchBar" destination="veu-sb-21u" id="yV1-kN-kmQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,14 +23,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <searchBar clipsSubviews="YES" contentMode="redraw" barStyle="blackTranslucent" searchBarStyle="minimal" placeholder="Search Text" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veu-sb-21u">
-                    <rect key="frame" x="16" y="59" width="361" height="56"/>
+                    <rect key="frame" x="8" y="59" width="377" height="56"/>
                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="6Sw-b4-O8g"/>
                     </connections>
                 </searchBar>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="M1q-QE-rhc">
-                    <rect key="frame" x="0.0" y="147" width="393" height="705"/>
+                    <rect key="frame" x="0.0" y="179" width="393" height="673"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1iZ-tk-8bK">
                         <size key="itemSize" width="0.0" height="0.0"/>
@@ -40,19 +43,69 @@
                         <outlet property="delegate" destination="-1" id="FIC-Uu-fWQ"/>
                     </connections>
                 </collectionView>
+                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFN-U9-WRi">
+                    <rect key="frame" x="0.0" y="179" width="393" height="673"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newsFallBack" translatesAutoresizingMaskIntoConstraints="NO" id="jzd-iZ-Dke">
+                            <rect key="frame" x="136.66666666666666" y="226" width="119.99999999999997" height="120"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="2ds-NM-5Oh"/>
+                                <constraint firstAttribute="height" constant="120" id="Pmn-8f-1Yi"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No news articles were found matching your search criteria." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPF-Kd-6mZ">
+                            <rect key="frame" x="16" y="378" width="361" height="40.666666666666686"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="jzd-iZ-Dke" firstAttribute="centerX" secondItem="PFN-U9-WRi" secondAttribute="centerX" id="3x3-Cz-rrB"/>
+                        <constraint firstAttribute="trailing" secondItem="uPF-Kd-6mZ" secondAttribute="trailing" constant="16" id="I6a-5K-t6Z"/>
+                        <constraint firstItem="jzd-iZ-Dke" firstAttribute="centerY" secondItem="PFN-U9-WRi" secondAttribute="centerY" multiplier="0.85" id="XZJ-eN-rIZ"/>
+                        <constraint firstItem="uPF-Kd-6mZ" firstAttribute="top" secondItem="jzd-iZ-Dke" secondAttribute="bottom" constant="32" id="iEl-WB-clD"/>
+                        <constraint firstItem="uPF-Kd-6mZ" firstAttribute="leading" secondItem="PFN-U9-WRi" secondAttribute="leading" constant="16" id="yAc-2x-dX9"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEd-Tz-OUK">
+                    <rect key="frame" x="16" y="123" width="177" height="40"/>
+                    <color key="backgroundColor" red="0.0" green="1" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="hQN-av-3Zh"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="From Date">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="fromDateButtonAction:" destination="-1" eventType="touchUpInside" id="BNR-b8-ZCh"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="M1q-QE-rhc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="40A-Dm-KPq"/>
-                <constraint firstItem="veu-sb-21u" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="KUg-it-Zbj"/>
-                <constraint firstItem="veu-sb-21u" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ns8-mi-FIL"/>
+                <constraint firstItem="mEd-Tz-OUK" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.45" id="9lc-0b-NwL"/>
+                <constraint firstItem="mEd-Tz-OUK" firstAttribute="top" secondItem="veu-sb-21u" secondAttribute="bottom" constant="8" id="JqI-Lf-BjF"/>
+                <constraint firstItem="veu-sb-21u" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="KUg-it-Zbj"/>
+                <constraint firstItem="PFN-U9-WRi" firstAttribute="trailing" secondItem="M1q-QE-rhc" secondAttribute="trailing" id="M6D-Ka-ICw"/>
+                <constraint firstItem="veu-sb-21u" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="59" id="Ns8-mi-FIL"/>
                 <constraint firstItem="M1q-QE-rhc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="RTo-sM-37B"/>
-                <constraint firstAttribute="trailing" secondItem="veu-sb-21u" secondAttribute="trailing" constant="16" id="aPZ-hF-diy"/>
+                <constraint firstItem="PFN-U9-WRi" firstAttribute="leading" secondItem="M1q-QE-rhc" secondAttribute="leading" id="X9g-NW-IK1"/>
+                <constraint firstItem="M1q-QE-rhc" firstAttribute="top" secondItem="mEd-Tz-OUK" secondAttribute="bottom" constant="16" id="ZoX-0B-46M"/>
+                <constraint firstAttribute="trailing" secondItem="veu-sb-21u" secondAttribute="trailing" constant="8" id="aPZ-hF-diy"/>
                 <constraint firstAttribute="bottom" secondItem="M1q-QE-rhc" secondAttribute="bottom" id="e8j-7d-rKr"/>
-                <constraint firstItem="M1q-QE-rhc" firstAttribute="top" secondItem="veu-sb-21u" secondAttribute="bottom" constant="32" id="zlh-L4-NmM"/>
+                <constraint firstItem="PFN-U9-WRi" firstAttribute="top" secondItem="M1q-QE-rhc" secondAttribute="top" id="fas-Gl-ciS"/>
+                <constraint firstItem="PFN-U9-WRi" firstAttribute="bottom" secondItem="M1q-QE-rhc" secondAttribute="bottom" id="fsI-xm-WbB"/>
+                <constraint firstItem="mEd-Tz-OUK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="hOH-wr-Npi"/>
             </constraints>
             <point key="canvasLocation" x="55.725190839694655" y="19.718309859154932"/>
         </view>
     </objects>
+    <resources>
+        <image name="newsFallBack" width="64" height="64"/>
+    </resources>
 </document>

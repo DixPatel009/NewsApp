@@ -13,6 +13,8 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var fromDateButton: UIButton!
+    @IBOutlet weak var noDataView: UIView!
     
     // MARK: - Properties
     
@@ -37,6 +39,10 @@ extension SearchViewController {
     
     private func setUpView() {
         self.view.backgroundColor = UI.Colors.backGroundColor
+        self.fromDateButton.roundCorners()
+        if let monthAgoDate = GlobalFunction.shared.oneMonthAgo() {
+            self.fromDateButton.setTitle(monthAgoDate.stringFromDate(), for: .normal)
+        }
         self.setupCollectionView()
     }
     
@@ -63,17 +69,14 @@ extension SearchViewController {
     }
     
     private func toggleLoader(isShow: Bool) {
-        hideSubviews(isShow)
         if (isShow) {
+            self.collectionView.alpha = 0
+            self.noDataView.isHidden = true
             activityIndicator.display(in: view)
         } else {
             activityIndicator.dismiss()
+            self.collectionView.alpha = 1
         }
-    }
-    
-    private func hideSubviews(_ shouldHide: Bool) {
-        let alpha: CGFloat = shouldHide ? 0 : 1
-        view.subviews.forEach { $0.alpha = alpha }
     }
     
     private func setupViewModel() {
@@ -81,18 +84,41 @@ extension SearchViewController {
         viewModel.onNewsFetched = { [weak self] in
             guard let self = self else { return }
             print("Data Fetched reload tableview")
-            self.toggleLoader(isShow: false)
-            self.collectionView.reloadData()
+            self.showNoDataView()
         }
         
         viewModel.onError = { [weak self] error in
             guard let self = self else { return }
             AlertHelper.showAlert(on: self, title: "Error", message: error.description)
-            self.toggleLoader(isShow: false)
+            self.showNoDataView()
         }
         
         self.toggleLoader(isShow: true)
-        viewModel.fetchNews(query: "apple", reset: true)
+        self.callFetchNewsAPI(reset: true)
+    }
+    
+    private func showNoDataView() {
+        self.collectionView.reloadData()
+        self.noDataView.isHidden = viewModel.articles.count > 0
+        self.toggleLoader(isShow: false)
+    }
+    
+    private func callFetchNewsAPI(reset: Bool = false) {
+        var query: String = "apple"
+        if let searchText = searchBar.text,
+           searchText.count >= 2 {
+            query = searchText
+        }
+        
+        viewModel.fetchNews(query: query, fromDate: self.getSelectedDateInString(), reset: reset)
+    }
+    
+    private func getSelectedDateInString() -> String? {
+        if let date = self.fromDateButton.titleLabel?.text,
+           date != "From Date"  {
+            return date
+        }
+        return nil
     }
 }
 
@@ -127,17 +153,48 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
 }
 
+// MARK: - IBAction
+
+extension SearchViewController {
+    
+    @IBAction func fromDateButtonAction(_ sender: UIButton) {
+        DatePickerManager.shared.showDatePicker(in: self, selectedDate: self.fromDateButton.titleLabel?.text) { [weak self] selectedDate in
+            guard let self = self else { return }
+            self.fromDateButton.setTitle(selectedDate, for: .normal)
+            self.toggleLoader(isShow: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                guard let self = self else { return }
+                self.callFetchNewsAPI(reset: true)
+            }
+        }
+    }
+    
+}
+
 // MARK: - UISearchBar Delegate
 
 extension SearchViewController: UISearchBarDelegate {
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                guard let self = self else { return }
+                self.toggleLoader(isShow: true)
+                self.callFetchNewsAPI(reset: true)
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text, searchText.count >= 2 else {
+        guard let searchText = searchBar.text,
+              searchText.count >= 2 else {
             AlertHelper.showAlert(on: self, title: Strings.AlertMessage.warning, message: Strings.AlertMessage.searchMinimumLimit)
             return
         }
         
-        viewModel.fetchNews(query: searchText, reset: true)
+        self.toggleLoader(isShow: true)
+        self.callFetchNewsAPI(reset: true)
         searchBar.resignFirstResponder()
     }
     
@@ -151,12 +208,7 @@ extension SearchViewController: UIScrollViewDelegate {
         let frameHeight = scrollView.frame.size.height
         
         if offsetY > contentHeight - frameHeight * 2 {
-            if let searchText = searchBar.text, searchText.count >= 2 {
-                viewModel.fetchNews(query: searchText)
-            } else {
-                viewModel.fetchNews(query: "apple")
-            }
-            
+            self.callFetchNewsAPI()
         }
     }
     

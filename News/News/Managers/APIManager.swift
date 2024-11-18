@@ -35,7 +35,7 @@ class APIManager {
         method: HTTPMethodType,
         parameters: [String: Any]? = nil,
         headers: HTTPHeaders? = nil,
-        completion: @escaping (Result<T, APIError>) -> Void
+        completion: @escaping (Result<(T, URLRequest?), APIError>) -> Void
     ) {
         let httpMethod: HTTPMethod
         switch method {
@@ -54,9 +54,8 @@ class APIManager {
             .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let result):
-                    completion(.success(result))
+                    completion(.success((result, response.request)))
                 case .failure(let error):
-                    print("API Request failed: \(error)")
                     completion(.failure(.failedRequest(error)))
                 }
             }

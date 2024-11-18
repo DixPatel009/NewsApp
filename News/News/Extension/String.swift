@@ -14,5 +14,10 @@ extension String {
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
         return ceil(boundingBox.height)
     }
-    
+   
+    func dateFromString() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = Strings.dateFrormatter.yyyyMMdd
+        return dateFormatter.date(from: self)
+    }
 }

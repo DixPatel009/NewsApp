@@ -34,7 +34,7 @@ class DatePickerManager: NSObject {
 
         alert.view.addSubview(datePicker)
         
-        let selectAction = UIAlertAction(title: "Select", style: .default) { _ in
+        let selectAction = UIAlertAction(title: "Done", style: .default) { _ in
             let selectedDateString = datePicker.date.stringFromDate()
             self.onDateSelected?(selectedDateString)
         }

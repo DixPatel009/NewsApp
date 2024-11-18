@@ -15,18 +15,20 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var fromDateButton: UIButton!
     @IBOutlet weak var noDataView: UIView!
+    @IBOutlet weak var layoutChangeButton: UIButton!
     
     // MARK: - Properties
     
     private var viewModel = NewsViewModel()
+    private var isGridLayout: Bool = false
     private let activityIndicator = ActivityIndicator()
     private let cellIdentifiers = NewsCollectionViewCell.identifier
+    private let gridCellIdentifiers = "NewsGridCollectionViewCell"
     
     // MARK: - View LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.setUpView()
         self.setupViewModel()
     }
@@ -39,6 +41,7 @@ extension SearchViewController {
     
     private func setUpView() {
         self.view.backgroundColor = UI.Colors.backGroundColor
+        self.layoutChangeButton.roundCorners()
         self.fromDateButton.roundCorners()
         if let monthAgoDate = GlobalFunction.shared.oneMonthAgo() {
             self.fromDateButton.setTitle(monthAgoDate.stringFromDate(), for: .normal)
@@ -47,25 +50,8 @@ extension SearchViewController {
     }
     
     private func setupCollectionView() {
-        self.collectionView.collectionViewLayout = createSingleColumnLayout()
         self.collectionView.register(UINib(nibName: cellIdentifiers, bundle: nil), forCellWithReuseIdentifier: cellIdentifiers)
-    }
-    
-    private func createSingleColumnLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 8
-        layout.headerReferenceSize = CGSize(width: view.frame.width, height: 0.0)
-        return layout
-    }
-    
-    private func createGridLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        let itemWidth = (view.frame.width - 8) / 2
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-        layout.minimumInteritemSpacing = 8
-        layout.minimumLineSpacing = 8
-        layout.headerReferenceSize = CGSize(width: view.frame.width, height: 50)
-        return layout
+        self.collectionView.register(UINib(nibName: gridCellIdentifiers, bundle: nil), forCellWithReuseIdentifier: gridCellIdentifiers)
     }
     
     private func toggleLoader(isShow: Bool) {
@@ -120,23 +106,9 @@ extension SearchViewController {
         }
         return nil
     }
-}
-
-extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfRows()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: NewsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers, for: indexPath) as! NewsCollectionViewCell
-        let article = viewModel.article(at: indexPath.row)
-        cell.populate(with: article)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let article = viewModel.article(at: indexPath.row)
+    private func createSingleColumnLayout(index: Int) -> CGSize {
+        let article = viewModel.article(at: index)
         let width = collectionView.frame.width
         
         let calculatedWidth = width - 176
@@ -149,6 +121,35 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         
         return CGSize(width: width, height: totalHeight + 48.0)
+    }
+    
+    private func createGridLayout() -> CGSize {
+        let width = UIScreen.main.bounds.width / 2
+        return CGSize(width: width, height: width + 120.0)
+    }
+}
+
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.numberOfRows()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let identifier = self.isGridLayout ? gridCellIdentifiers : cellIdentifiers
+        let cell: NewsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! NewsCollectionViewCell
+        let article = viewModel.article(at: indexPath.row)
+        cell.populate(with: article)
+        return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if self.isGridLayout {
+            return createGridLayout()
+        } else {
+            return self.createSingleColumnLayout(index: indexPath.row)
+        }
     }
     
 }
@@ -169,6 +170,13 @@ extension SearchViewController {
         }
     }
     
+    
+    @IBAction func layoutChangeButtonAction(_ sender: UIButton) {
+        self.isGridLayout.toggle()
+        self.collectionView.reloadData()
+        let buttonTitle = self.isGridLayout ? "Switch to List" : "Switch to Grid"
+        self.layoutChangeButton.setTitle(buttonTitle, for: .normal)
+    }
 }
 
 // MARK: - UISearchBar Delegate

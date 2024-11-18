@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="collectionView" destination="M1q-QE-rhc" id="i6E-ae-Huu"/>
                 <outlet property="fromDateButton" destination="mEd-Tz-OUK" id="yqS-cg-VyU"/>
+                <outlet property="layoutChangeButton" destination="ngw-5r-AXb" id="PUN-Ki-eCI"/>
                 <outlet property="noDataView" destination="PFN-U9-WRi" id="Tfl-5F-LyY"/>
                 <outlet property="searchBar" destination="veu-sb-21u" id="yV1-kN-kmQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -69,38 +70,54 @@
                         <constraint firstItem="uPF-Kd-6mZ" firstAttribute="leading" secondItem="PFN-U9-WRi" secondAttribute="leading" constant="16" id="yAc-2x-dX9"/>
                     </constraints>
                 </view>
-                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEd-Tz-OUK">
-                    <rect key="frame" x="16" y="123" width="177" height="40"/>
-                    <color key="backgroundColor" red="0.0" green="1" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Eo7-AR-I6a">
+                    <rect key="frame" x="16" y="123" width="361" height="40"/>
+                    <subviews>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEd-Tz-OUK">
+                            <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="40"/>
+                            <color key="backgroundColor" red="0.0" green="1" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="From Date">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="fromDateButtonAction:" destination="-1" eventType="touchUpInside" id="BNR-b8-ZCh"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngw-5r-AXb">
+                            <rect key="frame" x="188.66666666666663" y="0.0" width="172.33333333333337" height="40"/>
+                            <color key="backgroundColor" red="0.0" green="1" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Switch to Grid">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="layoutChangeButtonAction:" destination="-1" eventType="touchUpInside" id="ify-wk-HNk"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="hQN-av-3Zh"/>
+                        <constraint firstAttribute="height" constant="40" id="MgF-EY-f2q"/>
                     </constraints>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="From Date">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <connections>
-                        <action selector="fromDateButtonAction:" destination="-1" eventType="touchUpInside" id="BNR-b8-ZCh"/>
-                    </connections>
-                </button>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="M1q-QE-rhc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="40A-Dm-KPq"/>
-                <constraint firstItem="mEd-Tz-OUK" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.45" id="9lc-0b-NwL"/>
-                <constraint firstItem="mEd-Tz-OUK" firstAttribute="top" secondItem="veu-sb-21u" secondAttribute="bottom" constant="8" id="JqI-Lf-BjF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Eo7-AR-I6a" secondAttribute="trailing" constant="16" id="IZG-AV-atG"/>
+                <constraint firstItem="M1q-QE-rhc" firstAttribute="top" secondItem="Eo7-AR-I6a" secondAttribute="bottom" constant="16" id="Irx-JZ-IAq"/>
                 <constraint firstItem="veu-sb-21u" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="KUg-it-Zbj"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="trailing" secondItem="M1q-QE-rhc" secondAttribute="trailing" id="M6D-Ka-ICw"/>
                 <constraint firstItem="veu-sb-21u" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="59" id="Ns8-mi-FIL"/>
                 <constraint firstItem="M1q-QE-rhc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="RTo-sM-37B"/>
+                <constraint firstItem="Eo7-AR-I6a" firstAttribute="top" secondItem="veu-sb-21u" secondAttribute="bottom" constant="8" id="SNF-h7-eim"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="leading" secondItem="M1q-QE-rhc" secondAttribute="leading" id="X9g-NW-IK1"/>
-                <constraint firstItem="M1q-QE-rhc" firstAttribute="top" secondItem="mEd-Tz-OUK" secondAttribute="bottom" constant="16" id="ZoX-0B-46M"/>
+                <constraint firstItem="Eo7-AR-I6a" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="YVn-v3-mZL"/>
                 <constraint firstAttribute="trailing" secondItem="veu-sb-21u" secondAttribute="trailing" constant="8" id="aPZ-hF-diy"/>
                 <constraint firstAttribute="bottom" secondItem="M1q-QE-rhc" secondAttribute="bottom" id="e8j-7d-rKr"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="top" secondItem="M1q-QE-rhc" secondAttribute="top" id="fas-Gl-ciS"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="bottom" secondItem="M1q-QE-rhc" secondAttribute="bottom" id="fsI-xm-WbB"/>
-                <constraint firstItem="mEd-Tz-OUK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="hOH-wr-Npi"/>
             </constraints>
             <point key="canvasLocation" x="55.725190839694655" y="19.718309859154932"/>
         </view>

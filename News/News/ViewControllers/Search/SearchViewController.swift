@@ -20,10 +20,12 @@ class SearchViewController: UIViewController {
     // MARK: - Properties
     
     private var viewModel = NewsViewModel()
+    private let articalViewModel = ArticleViewModel()
     private var isGridLayout: Bool = false
     private let activityIndicator = ActivityIndicator()
     private let cellIdentifiers = NewsCollectionViewCell.identifier
     private let gridCellIdentifiers = "NewsGridCollectionViewCell"
+    private var swipableExtension: CollectionSwipableCellExtension?
     
     // MARK: - View LifeCycle
     
@@ -37,7 +39,7 @@ class SearchViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -63,6 +65,13 @@ extension SearchViewController {
         self.collectionView.keyboardDismissMode = .onDrag
         self.collectionView.register(UINib(nibName: cellIdentifiers, bundle: nil), forCellWithReuseIdentifier: cellIdentifiers)
         self.collectionView.register(UINib(nibName: gridCellIdentifiers, bundle: nil), forCellWithReuseIdentifier: gridCellIdentifiers)
+        setUpSwipable()
+    }
+    
+    private func setUpSwipable() {
+        swipableExtension = CollectionSwipableCellExtension(with: collectionView)
+        swipableExtension?.delegate = self
+        swipableExtension?.isEnabled = true
     }
     
     private func toggleLoader(isShow: Bool) {
@@ -165,15 +174,15 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cell.resetSwipableActions()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let viewController = NewsDetailViewController(article: viewModel.article(at: indexPath.item))
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
 }
 
 // MARK: - IBAction
@@ -248,4 +257,38 @@ extension SearchViewController: UIScrollViewDelegate {
         }
     }
     
+}
+
+// MARK: - Collection Swipable Cell Extension Delegate
+extension SearchViewController: CollectionSwipableCellExtensionDelegate {
+
+    func isSwipable(itemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func swipableActionsLayout(forItemAt indexPath: IndexPath) -> CollectionSwipableCellLayout? {
+        let article = viewModel.article(at: indexPath.item)
+        let actionLayout = CollectionSwipableCellOneButtonLayout(buttonWidth: 150, insets: .zero, direction: .leftToRight)
+        actionLayout.button.backgroundColor = articalViewModel.isArticleInFavorites(article) ? .red : .green
+        actionLayout.button.setTitle(articalViewModel.isArticleInFavorites(article) ? "Delete From Favorite" : "Add To Favorite", for: .normal)
+        actionLayout.button.tintColor = articalViewModel.isArticleInFavorites(article) ? .white : .black
+        
+        actionLayout.action = { [weak self] in
+            self?.handelSwipeToFavourite(atIndexPath: indexPath)
+        }
+
+        return actionLayout
+    }
+
+    private func handelSwipeToFavourite(atIndexPath indexPath: IndexPath) {
+        let article = viewModel.article(at: indexPath.item)
+        if articalViewModel.isArticleInFavorites(article) {
+            articalViewModel.removeArticleFromFavorites(article)
+            self.view.makeToast(Strings.AlertMessage.removedFromFavourite)
+        } else {
+            articalViewModel.saveArticleToFavorites(article)
+            self.view.makeToast(Strings.AlertMessage.addedInFavourite)
+        }
+        self.collectionView.reloadData()
+    }
 }

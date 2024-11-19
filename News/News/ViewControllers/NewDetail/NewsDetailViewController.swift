@@ -112,8 +112,10 @@ extension NewsDetailViewController {
         }
         if viewModel.isArticleInFavorites(article) {
             viewModel.removeArticleFromFavorites(article)
+            self.view.makeToast(Strings.AlertMessage.removedFromFavourite)
         } else {
             viewModel.saveArticleToFavorites(article)
+            self.view.makeToast(Strings.AlertMessage.addedInFavourite)
         }
         self.setFavouriteButton()
     }

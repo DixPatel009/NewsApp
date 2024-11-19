@@ -118,6 +118,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             let article = viewModel.favoriteArticles[indexPath.section]
             viewModel.removeArticleFromFavorites(article)
+            self.view.makeToast(Strings.AlertMessage.removedFromFavourite)
         }
     }
 }

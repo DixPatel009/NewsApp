@@ -26,6 +26,8 @@ struct Strings {
         static let emptyNewKey = "Please enter the new API Key"
         static let keyUpdateSucessfully = "API Key updated successfully"
         static let emptyKey = "Please enter the API Key"
+        static let removedFromFavourite = "Article Removed From Favourite"
+        static let addedInFavourite = "Article Added In Favourite"
     }
     
     struct dateFrormatter {

@@ -33,6 +33,16 @@ class SearchViewController: UIViewController {
         self.setupViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
 }
 
 // MARK: - Setup
@@ -209,11 +219,15 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         guard let searchText = searchBar.text,
-              searchText.isEmpty,
-              searchText.count >= 2 else {
+              !searchText.isEmpty else {
+            return
+        }
+        
+        if searchText.count <= 2 {
             AlertHelper.showAlert(on: self, title: Strings.AlertMessage.warning, message: Strings.AlertMessage.searchMinimumLimit)
             return
         }
+        
         self.toggleLoader(isShow: true)
         self.callFetchNewsAPI(reset: true)
     }

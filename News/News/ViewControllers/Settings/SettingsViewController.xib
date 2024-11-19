@@ -17,12 +17,12 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="i5M-Pr-FkT">
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="5sU-8l-ilH">
-                    <rect key="frame" x="16" y="167" width="361" height="96"/>
+                    <rect key="frame" x="16" y="149" width="361" height="96"/>
                     <subviews>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KsN-B3-VsL">
                             <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
@@ -77,10 +77,10 @@
             </subviews>
             <color key="backgroundColor" systemColor="labelColor"/>
             <constraints>
+                <constraint firstItem="CK3-Vn-C6k" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" id="Fpy-Ub-9fH"/>
                 <constraint firstAttribute="trailing" secondItem="CK3-Vn-C6k" secondAttribute="trailing" id="JmP-SD-SfK"/>
                 <constraint firstAttribute="trailing" secondItem="5sU-8l-ilH" secondAttribute="trailing" constant="16" id="NkN-fe-vki"/>
-                <constraint firstItem="5sU-8l-ilH" firstAttribute="top" secondItem="CK3-Vn-C6k" secondAttribute="bottom" constant="64" id="R5v-Es-z9n"/>
-                <constraint firstItem="CK3-Vn-C6k" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="59" id="a6g-Ah-9Ge"/>
+                <constraint firstItem="5sU-8l-ilH" firstAttribute="top" secondItem="CK3-Vn-C6k" secondAttribute="bottom" constant="46" id="R5v-Es-z9n"/>
                 <constraint firstItem="CK3-Vn-C6k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gLF-DM-c9o"/>
                 <constraint firstItem="5sU-8l-ilH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="lvL-77-Vj4"/>
             </constraints>

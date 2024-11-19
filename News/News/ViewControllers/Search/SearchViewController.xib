@@ -113,7 +113,6 @@
                 <constraint firstItem="M1q-QE-rhc" firstAttribute="top" secondItem="Eo7-AR-I6a" secondAttribute="bottom" constant="16" id="Irx-JZ-IAq"/>
                 <constraint firstItem="veu-sb-21u" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="KUg-it-Zbj"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="trailing" secondItem="M1q-QE-rhc" secondAttribute="trailing" id="M6D-Ka-ICw"/>
-                <constraint firstItem="veu-sb-21u" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="59" id="Ns8-mi-FIL"/>
                 <constraint firstItem="M1q-QE-rhc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="RTo-sM-37B"/>
                 <constraint firstItem="Eo7-AR-I6a" firstAttribute="top" secondItem="veu-sb-21u" secondAttribute="bottom" constant="8" id="SNF-h7-eim"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="leading" secondItem="M1q-QE-rhc" secondAttribute="leading" id="X9g-NW-IK1"/>
@@ -122,6 +121,7 @@
                 <constraint firstAttribute="bottom" secondItem="M1q-QE-rhc" secondAttribute="bottom" id="e8j-7d-rKr"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="top" secondItem="M1q-QE-rhc" secondAttribute="top" id="fas-Gl-ciS"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="bottom" secondItem="M1q-QE-rhc" secondAttribute="bottom" id="fsI-xm-WbB"/>
+                <constraint firstItem="veu-sb-21u" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="srN-Ox-iP0"/>
             </constraints>
             <point key="canvasLocation" x="55.725190839694655" y="19.718309859154932"/>
         </view>

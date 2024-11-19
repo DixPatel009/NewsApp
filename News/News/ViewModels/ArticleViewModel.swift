@@ -18,6 +18,7 @@ class ArticleViewModel {
     // Fetch favorite articles from repository
     func fetchFavoriteArticles() {
         favoriteArticles = repository.getFavoriteArticles()
+        favoriteArticles.reverse()
         onFavoritesUpdated?()
     }
     

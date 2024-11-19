@@ -46,8 +46,10 @@ class NewsRepository: NewsRepositoryProtocol {
             parameters["to"] = Date().stringFromDate()
         }
         
+        let url = API.baseURL + API.everything
+        
         APIManager.shared.request(
-            url: API.baseURL,
+            url: url,
             method: .get,
             parameters: parameters,
             headers: nil

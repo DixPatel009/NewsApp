@@ -10,6 +10,7 @@ struct Strings {
     struct AlertMessage {
         static let searchMinimumLimit = "Search text must be at leasr 3 charcaters long."
         static let warning = "Warning"
+        static let error = "Error"
         static let logout = "Are you sure logout?"
     }
     

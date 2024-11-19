@@ -15,7 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     // MARK: - Properties
-    
+    private var viewModel = AuthViewModel()
     var loginSucessfull: (() -> Void)?
     
     // MARK: - View LifeCycle
@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpView()
+        self.setupViewModel()
     }
     
 }
@@ -34,6 +35,31 @@ extension LoginViewController {
     private func setUpView() {
         self.view.backgroundColor = UI.Colors.backGroundColor
         self.loginButton.roundCorners()
+    }
+    
+    private func setupViewModel() {
+        
+        viewModel.onAuthenticationSuccess = { [weak self] in
+            guard let self = self else { return }
+            self.saveKeyInLocalStorage()
+        }
+        
+        viewModel.onAuthenticationFailure = { [weak self] error in
+            guard let self = self else { return }
+            AlertHelper.showAlert(on: self, title: Strings.AlertMessage.error, message: error)
+        }
+        
+    }
+    
+    private func verfiryingAPIKey() {
+        
+        guard let text = apiKeyTextFiled.text,
+              !text.isEmpty else {
+            AlertHelper.showAlert(on: self, title: "", message: "Please enter the API Key")
+            return
+        }
+        
+        viewModel.authenticate(apiKey: text)
     }
     
     private func saveKeyInLocalStorage() {
@@ -62,7 +88,7 @@ extension LoginViewController {
     
     @IBAction func LoginButtonAction(_ sender: UIButton) {
         self.view.endEditing(true)
-        self.saveKeyInLocalStorage()
+        self.verfiryingAPIKey()
     }
     
 }

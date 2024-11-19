@@ -8,7 +8,7 @@
 import UIKit
 
 class LaunchScreenViewController: UIViewController {
-
+    
     // MARK: - Properties
     
     var userAlreadyLoggedIn: ((Bool) -> Void)?
@@ -20,14 +20,6 @@ class LaunchScreenViewController: UIViewController {
         self.setUpView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.checkIfUserAlreadyLoggedIn()
-        }
-    }
-    
 }
 
 // MARK: - Setup
@@ -36,6 +28,21 @@ extension LaunchScreenViewController {
     
     private func setUpView() {
         self.view.backgroundColor = UI.Colors.backGroundColor
+        self.setUpLogoView()
+    }
+    
+    private func setUpLogoView() {
+        let imageV = UIImageView(frame: CGRect(x: 50, y: 100, width: 75, height: 75))
+        imageV.center = view.center
+        imageV.image = UIImage(named: "news")
+        view.addSubview(imageV)
+        
+        UIView.animate(withDuration: 2.0, animations: {
+            imageV.transform = CGAffineTransform(scaleX: 2, y: 2)
+        }) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.checkIfUserAlreadyLoggedIn()
+        }
     }
     
     private func checkIfUserAlreadyLoggedIn() {

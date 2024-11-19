@@ -12,6 +12,9 @@ class ArticleRepository {
     // Save an article to the favorites
     func saveArticleToFavorites(_ article: Article) {
         coreDataManager.saveArticle(article)
+        
+        //Update the badge count in Userdefaults
+        UserDefaultManager.shared.incrementFavoriteCount()
     }
     
     // Fetch favorite articles
@@ -27,5 +30,10 @@ class ArticleRepository {
     // Check if article is already in favorites
     func isArticleInFavorites(_ article: Article) -> Bool {
         coreDataManager.isArticleInFavorites(article)
+    }
+    
+    // Clear fovrites count from userdefaults when user visite favorite page
+    func clearFavoriteCount() {
+        UserDefaultManager.shared.clearFavoriteCount()
     }
 }

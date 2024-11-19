@@ -9,6 +9,7 @@ import Foundation
 
 class NewsViewModel {
     
+    // MARK: - Properties
     private var newsRepository: NewsRepositoryProtocol
     private(set) var articles: [Article] = []
     private var currentPage = 1
@@ -44,7 +45,7 @@ class NewsViewModel {
             self.isLoading = false
             switch result {
             case .success((let newArticles, let request)):
-                let filteredArticles = newArticles.filter { $0.title.lowercased() != "[removed]" }
+                let filteredArticles = newArticles.filter { $0.title.lowercased() != "[removed]" } // removed item remove from array
                 self.articles.append(contentsOf: filteredArticles)
                 self.requestURL = request?.url?.absoluteString
                 self.currentPage += 1  // Increment page for next fetch

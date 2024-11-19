@@ -9,7 +9,12 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
+    // MARK: - IBOutlet
+    
     @IBOutlet weak var favoriteTableView: UITableView!
+    @IBOutlet weak var noDataView: UIView!
+    
+    // MARK: - Properties
     
     private let viewModel = ArticleViewModel()
     private let cellIdentifiers = NewsTableViewCell.identifier
@@ -30,6 +35,13 @@ class FavoritesViewController: UIViewController {
         self.viewModel.fetchFavoriteArticles()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Clear the badge when the favorites tab is visited
+        viewModel.clearFavorites()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -43,15 +55,22 @@ extension FavoritesViewController {
     
     private func setUpView() {
         self.view.backgroundColor = UI.Colors.backGroundColor
+        self.noDataView.backgroundColor = UI.Colors.backGroundColor
     }
     
     private func setUpViewModel() {
         
         self.viewModel.onFavoritesUpdated = { [weak self] in
             guard let self = self else { return }
+            self.setNoDataView()
             favoriteTableView.reloadData()
         }
         
+    }
+    
+    private func setNoDataView() {
+        self.noDataView.isHidden = !viewModel.favoriteArticles.isEmpty
+        self.favoriteTableView.isHidden = viewModel.favoriteArticles.isEmpty
     }
     
     private func setUpTableView() {
@@ -60,11 +79,14 @@ extension FavoritesViewController {
     }
 }
 
+// MARK: - UITableView Delegate & DataSource
+
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.favoriteArticles.count
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }

@@ -18,26 +18,12 @@
         <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news" translatesAutoresizingMaskIntoConstraints="NO" id="bqf-Do-4ph">
-                    <rect key="frame" x="146.66666666666666" y="376" width="100" height="100"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="100" id="js6-0S-xCZ"/>
-                        <constraint firstAttribute="width" constant="100" id="tAz-H9-g7p"/>
-                    </constraints>
-                </imageView>
-            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="labelColor"/>
-            <constraints>
-                <constraint firstItem="bqf-Do-4ph" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3CT-3a-hfJ"/>
-                <constraint firstItem="bqf-Do-4ph" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="rLL-pb-Eqo"/>
-            </constraints>
             <point key="canvasLocation" x="25" y="20"/>
         </view>
     </objects>
     <resources>
-        <image name="news" width="64" height="64"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

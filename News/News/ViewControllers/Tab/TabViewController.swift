@@ -9,10 +9,18 @@ import UIKit
 
 class TabViewController: UITabBarController {
     
+    private let viewModel = ArticleViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpTabbar()
         self.setUpMenu()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Update the badge when the tab bar is initially loaded
+        viewModel.updateTabBarBadge()
     }
     
     private func setUpTabbar() {

@@ -10,10 +10,11 @@ import UIKit
 
 class CoreDataManager {
     
+    // MARK: - Properties
     static let shared = CoreDataManager()
     private let entityName = "Articles"
     
-    //Managed Object Context
+    // Managed Object Context
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // Save Article to Core Data

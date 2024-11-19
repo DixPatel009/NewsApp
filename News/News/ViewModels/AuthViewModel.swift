@@ -10,6 +10,7 @@ import Alamofire
 
 class AuthViewModel {
     
+    // MARK: - Properties
     private var repository = AuthRepository()
     var onAuthenticationSuccess: (() -> Void)?
     var onAuthenticationFailure: ((String) -> Void)?

@@ -10,6 +10,7 @@ import UIKit
 
 class GlobalFunction {
     
+    // MARK: - Properties
     static let shared = GlobalFunction()
     
     func oneMonthAgo() -> Date? {

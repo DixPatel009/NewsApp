@@ -9,8 +9,11 @@ import Security
 import Foundation
 
 class KeychainManager {
+    
+    // MARK: - Properties
     static let shared = KeychainManager()
     
+    // Save data from keychain
     func save(_ value: String, for key: String) -> Bool {
         guard let data = value.data(using: .utf8) else { return false }
         
@@ -25,6 +28,7 @@ class KeychainManager {
         return status == errSecSuccess
     }
     
+    // Get data from keychain
     func get(for key: String) -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -42,6 +46,7 @@ class KeychainManager {
         return value
     }
     
+    // Update data from keychain
     func update(value: String, for key: String) -> Bool {
         guard let data = value.data(using: .utf8) else { return false }
         
@@ -56,6 +61,7 @@ class KeychainManager {
         return status == errSecSuccess
     }
     
+    // Delete data from keychain
     func delete(for key: String) -> Bool {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -65,6 +71,7 @@ class KeychainManager {
         return status == errSecSuccess
     }
     
+    // Remove all data from keychain
     func removeAll() -> Bool {
         let secItemClasses: [CFString] = [
             kSecClassGenericPassword,
@@ -88,4 +95,5 @@ class KeychainManager {
         
         return true
     }
+    
 }

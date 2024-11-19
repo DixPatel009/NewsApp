@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoritesViewController" customModule="News" customModuleProvider="target">
             <connections>
                 <outlet property="favoriteTableView" destination="L8h-g8-qD8" id="MFw-U7-mNy"/>
+                <outlet property="noDataView" destination="UBn-hH-0kU" id="Tog-Qy-Qa3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -45,24 +46,65 @@
                         <outlet property="delegate" destination="-1" id="vye-IZ-ReB"/>
                     </connections>
                 </tableView>
+                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBn-hH-0kU">
+                    <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noDataFavourite" translatesAutoresizingMaskIntoConstraints="NO" id="g81-iA-LXF">
+                            <rect key="frame" x="98.333333333333329" y="134" width="196.33333333333337" height="256"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="No Article Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqa-G9-yO9">
+                            <rect key="frame" x="128.66666666666666" y="406" width="135.99999999999997" height="21"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpw-cq-phA">
+                            <rect key="frame" x="32" y="459" width="329" height="36"/>
+                            <string key="text">It seems, No articles added in Favourites
+"Lets added in Favourites Now"</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" systemColor="systemGray6Color"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="labelColor"/>
+                    <constraints>
+                        <constraint firstItem="g81-iA-LXF" firstAttribute="width" secondItem="UBn-hH-0kU" secondAttribute="width" multiplier="0.5" id="9we-EE-EZu"/>
+                        <constraint firstItem="zqa-G9-yO9" firstAttribute="centerX" secondItem="UBn-hH-0kU" secondAttribute="centerX" id="NpX-de-tQN"/>
+                        <constraint firstItem="g81-iA-LXF" firstAttribute="centerY" secondItem="UBn-hH-0kU" secondAttribute="centerY" multiplier="0.7" id="WwT-CC-yj8"/>
+                        <constraint firstAttribute="trailing" secondItem="cpw-cq-phA" secondAttribute="trailing" constant="32" id="iP4-VY-aG8"/>
+                        <constraint firstItem="cpw-cq-phA" firstAttribute="leading" secondItem="UBn-hH-0kU" secondAttribute="leading" constant="32" id="kMR-hj-4C8"/>
+                        <constraint firstItem="g81-iA-LXF" firstAttribute="centerX" secondItem="UBn-hH-0kU" secondAttribute="centerX" id="mA1-ay-NSS"/>
+                        <constraint firstItem="cpw-cq-phA" firstAttribute="top" secondItem="zqa-G9-yO9" secondAttribute="bottom" constant="32" id="t68-iA-scS"/>
+                        <constraint firstItem="zqa-G9-yO9" firstAttribute="top" secondItem="g81-iA-LXF" secondAttribute="bottom" constant="16" id="uuo-0x-gVD"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="labelColor"/>
             <constraints>
                 <constraint firstItem="L8h-g8-qD8" firstAttribute="top" secondItem="9al-dY-gzh" secondAttribute="bottom" id="GMa-2X-r4a"/>
+                <constraint firstItem="UBn-hH-0kU" firstAttribute="bottom" secondItem="L8h-g8-qD8" secondAttribute="bottom" id="Nwe-zi-HKy"/>
+                <constraint firstItem="UBn-hH-0kU" firstAttribute="top" secondItem="L8h-g8-qD8" secondAttribute="top" id="R5V-g2-gvj"/>
                 <constraint firstItem="9al-dY-gzh" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="RX0-8N-Afh"/>
                 <constraint firstAttribute="trailing" secondItem="L8h-g8-qD8" secondAttribute="trailing" id="VA7-0V-wLe"/>
+                <constraint firstItem="UBn-hH-0kU" firstAttribute="trailing" secondItem="L8h-g8-qD8" secondAttribute="trailing" id="ZA1-GF-E4N"/>
                 <constraint firstItem="9al-dY-gzh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZI2-40-8NS"/>
                 <constraint firstItem="L8h-g8-qD8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="buS-K0-qJ7"/>
                 <constraint firstItem="9al-dY-gzh" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ve3-uO-LTY"/>
+                <constraint firstItem="UBn-hH-0kU" firstAttribute="leading" secondItem="L8h-g8-qD8" secondAttribute="leading" id="wDh-f8-pl1"/>
                 <constraint firstAttribute="bottom" secondItem="L8h-g8-qD8" secondAttribute="bottom" id="yy5-PE-TT2"/>
             </constraints>
             <point key="canvasLocation" x="58.778625954198468" y="19.718309859154932"/>
         </view>
     </objects>
     <resources>
+        <image name="noDataFavourite" width="256" height="256"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

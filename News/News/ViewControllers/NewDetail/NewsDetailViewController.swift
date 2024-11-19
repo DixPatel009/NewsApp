@@ -45,6 +45,11 @@ class NewsDetailViewController: UIViewController {
         self.setUpView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setUpArticaleData()
+    }
+    
 }
 
 // MARK: - Setup
@@ -58,7 +63,6 @@ extension NewsDetailViewController {
         self.openButton.roundCorners()
         self.shareButton.roundCorners()
         self.setCustomBackButton()
-        self.setUpArticaleData()
     }
     
     private func setUpArticaleData() {

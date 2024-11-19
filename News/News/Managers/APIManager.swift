@@ -25,6 +25,7 @@ enum APIError: Error {
 
 class APIManager {
     
+    // MARK: - Properties
     static let shared = APIManager()
     
     private init() {}

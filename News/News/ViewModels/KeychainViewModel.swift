@@ -8,8 +8,9 @@
 import Foundation
 
 class KeychainViewModel {
+    
+    // MARK: - Properties
     private let keychainRepository: KeychainRepositoryProtocol
-
     var retrievedValue: String?
 
     init(repository: KeychainRepositoryProtocol = KeychainRepository()) {

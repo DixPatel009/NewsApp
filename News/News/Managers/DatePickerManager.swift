@@ -9,8 +9,8 @@ import UIKit
 
 class DatePickerManager: NSObject {
     
+    // MARK: - Properties
     static let shared = DatePickerManager()
-
     private var onDateSelected: ((String) -> Void)?
     
     private override init() {}
@@ -23,7 +23,6 @@ class DatePickerManager: NSObject {
         let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: alert.view.bounds.width - 16, height: 200))
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
-        
         datePicker.maximumDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) // Max date is yesterday
         
         if let parsedDate = selectedDate?.dateFromString() {
@@ -33,7 +32,6 @@ class DatePickerManager: NSObject {
         }
 
         alert.view.addSubview(datePicker)
-        
         let selectAction = UIAlertAction(title: "Done", style: .default) { _ in
             let selectedDateString = datePicker.date.stringFromDate()
             self.onDateSelected?(selectedDateString)

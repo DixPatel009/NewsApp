@@ -1,3 +1,9 @@
+//
+//  String.swift
+//  News
+//
+//  Created by Akabari Dixit on 17/11/24.
+//
 
 struct Strings {
     
@@ -24,6 +30,10 @@ struct Strings {
     
     struct dateFrormatter {
         static let yyyyMMdd = "yyyy-MM-dd"
+    }
+    
+    struct userDefault {
+        static let favoriteCount = "favoriteCount"
     }
     
     static let cancel = "Cancel"

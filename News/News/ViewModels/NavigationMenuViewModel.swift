@@ -9,6 +9,7 @@ import UIKit
 
 class NavigationMenuViewModel {
     
+    // MARK: - Properties
     let tabBarItems: [NavigationMenuItem]
     
     init() {
@@ -22,6 +23,7 @@ class NavigationMenuViewModel {
         return [search, favorites, settings]
     }
     
+    // Setup Search Item
     static private func createSearch() -> NavigationMenuItem {
         var home = NavigationMenuItem()
         home.id = Constants.NavigationMenu.Ids.search
@@ -31,6 +33,7 @@ class NavigationMenuViewModel {
         return home
     }
     
+    // Setup Favorites Item
     static private func createFavorites() -> NavigationMenuItem {
         var home = NavigationMenuItem()
         home.id = Constants.NavigationMenu.Ids.favorites
@@ -40,6 +43,7 @@ class NavigationMenuViewModel {
         return home
     }
     
+    // Setup Setting Item
     static private func createSettings() -> NavigationMenuItem {
         var home = NavigationMenuItem()
         home.id = Constants.NavigationMenu.Ids.settings

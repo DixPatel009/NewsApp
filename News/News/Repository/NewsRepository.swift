@@ -46,7 +46,6 @@ class NewsRepository: NewsRepositoryProtocol {
             parameters["to"] = Date().stringFromDate()
         }
         
-        print(parameters)
         APIManager.shared.request(
             url: API.baseURL,
             method: .get,

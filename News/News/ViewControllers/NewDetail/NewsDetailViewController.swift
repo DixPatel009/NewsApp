@@ -21,6 +21,7 @@ class NewsDetailViewController: UIViewController {
     // MARK: - Properties
     
     var articleModel: Article?
+    private let viewModel = ArticleViewModel()
     
     // MARK: - View LifeCycle
     
@@ -63,7 +64,13 @@ extension NewsDetailViewController {
             self.titleLabel.text = model.title
             self.descriptionLabel.text = model.description
             self.contentLabel.text = model.content
-            self.favouriteButton.tintColor = .lightGray
+            self.setFavouriteButton()
+        }
+    }
+    
+    private func setFavouriteButton() {
+        if let model = self.articleModel {
+            self.favouriteButton.tintColor = viewModel.isArticleInFavorites(model) ? UI.Colors.coreBlue : .lightGray
         }
     }
 
@@ -91,7 +98,14 @@ extension NewsDetailViewController: UIScrollViewDelegate {
 extension NewsDetailViewController {
     
     @IBAction func favouriteButtonAction(_ sender: UIButton) {
-        
+        if let article = self.articleModel {
+            if viewModel.isArticleInFavorites(article) {
+                viewModel.removeArticleFromFavorites(article)
+            } else {
+                viewModel.saveArticleToFavorites(article)
+            }
+            self.setFavouriteButton()
+        }
     }
     
 }

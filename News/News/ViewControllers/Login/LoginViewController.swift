@@ -55,7 +55,7 @@ extension LoginViewController {
         
         guard let text = apiKeyTextFiled.text,
               !text.isEmpty else {
-            AlertHelper.showAlert(on: self, title: "", message: "Please enter the API Key")
+            AlertHelper.showAlert(on: self, title: Strings.AlertMessage.warning, message: Strings.AlertMessage.emptyKey)
             return
         }
         
@@ -66,7 +66,7 @@ extension LoginViewController {
         
         guard let text = apiKeyTextFiled.text,
               !text.isEmpty else {
-            AlertHelper.showAlert(on: self, title: "", message: "Please enter the API Key")
+            AlertHelper.showAlert(on: self, title: Strings.AlertMessage.warning, message: Strings.AlertMessage.emptyKey)
             return
         }
         
@@ -75,14 +75,14 @@ extension LoginViewController {
         if isSaved {
             self.loginSucessfull?()
         } else {
-            AlertHelper.showAlert(on: self, title: "", message: "Something went wrong..!")
+            AlertHelper.showAlert(on: self, title: Strings.AlertMessage.error, message: Strings.AlertMessage.somethingWrong)
         }
         
     }
     
 }
 
-// MARK: IBAction
+// MARK: - IBAction
 
 extension LoginViewController {
     

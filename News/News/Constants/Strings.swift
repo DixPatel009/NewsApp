@@ -11,7 +11,15 @@ struct Strings {
         static let searchMinimumLimit = "Search text must be at leasr 3 charcaters long."
         static let warning = "Warning"
         static let error = "Error"
+        static let somethingWrong = "Something went wrong..!"
+        static let success = "Success"
         static let logout = "Are you sure logout?"
+        static let emptyOldKey = "Please enter the old API Key"
+        static let notFoundOldKey = "Old API Key not found"
+        static let inValidOldKey = "Please enter valid old API Key"
+        static let emptyNewKey = "Please enter the new API Key"
+        static let keyUpdateSucessfully = "API Key updated successfully"
+        static let emptyKey = "Please enter the API Key"
     }
     
     struct dateFrormatter {

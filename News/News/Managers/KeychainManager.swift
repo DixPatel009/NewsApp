@@ -42,6 +42,20 @@ class KeychainManager {
         return value
     }
     
+    func update(value: String, for key: String) -> Bool {
+        guard let data = value.data(using: .utf8) else { return false }
+        
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount
+            as String: key
+        ]
+        
+        let status = SecItemUpdate(query as CFDictionary,
+                                   [kSecValueData : data] as CFDictionary)
+        return status == errSecSuccess
+    }
+    
     func delete(for key: String) -> Bool {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,

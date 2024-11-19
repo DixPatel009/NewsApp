@@ -19,6 +19,10 @@ class KeychainViewModel {
     func saveData(value: String, forKey key: String) -> Bool {
         return keychainRepository.saveData(value: value, forKey: key)
     }
+    
+    func updateData(value: String, forKey key: String) -> Bool {
+        return keychainRepository.saveData(value: value, forKey: key)
+    }
 
     func fetchData(forKey key: String) -> String? {
         return keychainRepository.getData(forKey: key)

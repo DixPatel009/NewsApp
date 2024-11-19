@@ -48,7 +48,8 @@ extension SettingsViewController {
     }
     
     @IBAction func changeAPIKeyButtonAction(_ sender: UIButton) {
-        
+        let viewController = ChangeAPIKeyViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
 }

@@ -7,12 +7,18 @@
 
 protocol KeychainRepositoryProtocol {
     func saveData(value: String, forKey key: String) -> Bool
+    func updateData(value: String, forKey key: String) -> Bool
     func getData(forKey key: String) -> String?
     func deleteData(forKey key: String) -> Bool
     func removeAllData() -> Bool
 }
 
 class KeychainRepository: KeychainRepositoryProtocol {
+    
+    func updateData(value: String, forKey key: String) -> Bool {
+        return KeychainManager.shared.update(value: value, for: key)
+    }
+    
     func saveData(value: String, forKey key: String) -> Bool {
         return KeychainManager.shared.save(value, for: key)
     }

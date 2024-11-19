@@ -16,6 +16,8 @@
                 <outlet property="favouriteButton" destination="W1S-fD-CWA" id="7t8-xb-Q3d"/>
                 <outlet property="imageView" destination="Pti-Ib-Dkf" id="IOs-1M-fVv"/>
                 <outlet property="navigationBarView" destination="QNR-RD-qKs" id="4eD-uV-NqK"/>
+                <outlet property="openButton" destination="yun-vi-XTU" id="09c-fZ-jX4"/>
+                <outlet property="shareButton" destination="aBa-xP-6HK" id="5oA-pj-eL2"/>
                 <outlet property="titleLabel" destination="9Dn-7P-jvz" id="gQO-aE-1qJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -67,6 +69,36 @@
                             <color key="textColor" systemColor="systemGray5Color"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="bho-ZS-NE5">
+                            <rect key="frame" x="16" y="441" width="361" height="40"/>
+                            <subviews>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yun-vi-XTU">
+                                    <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="40"/>
+                                    <color key="backgroundColor" red="0.0" green="1" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Open ">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="openButtonAction:" destination="-1" eventType="touchUpInside" id="bhb-iC-m8u"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBa-xP-6HK">
+                                    <rect key="frame" x="188.66666666666663" y="0.0" width="172.33333333333337" height="40"/>
+                                    <color key="backgroundColor" red="0.0" green="1" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Share">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="shareButtonAction:" destination="-1" eventType="touchUpInside" id="sk8-Ad-qca"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="ZWi-ur-vD6"/>
+                            </constraints>
+                        </stackView>
                     </subviews>
                     <constraints>
                         <constraint firstItem="WFi-DX-Fdn" firstAttribute="top" secondItem="9Dn-7P-jvz" secondAttribute="bottom" constant="16" id="2hL-2x-gRe"/>
@@ -77,6 +109,7 @@
                         <constraint firstItem="W1S-fD-CWA" firstAttribute="leading" secondItem="9Dn-7P-jvz" secondAttribute="trailing" constant="16" id="EPA-GK-b80"/>
                         <constraint firstItem="MHP-0c-WXY" firstAttribute="top" secondItem="WFi-DX-Fdn" secondAttribute="bottom" constant="16" id="GI4-Uu-TBM"/>
                         <constraint firstItem="Pti-Ib-Dkf" firstAttribute="top" secondItem="fdi-JS-8ry" secondAttribute="top" id="Iiq-cN-AlS"/>
+                        <constraint firstItem="bho-ZS-NE5" firstAttribute="top" secondItem="MHP-0c-WXY" secondAttribute="bottom" constant="32" id="TJZ-QP-Hpz"/>
                         <constraint firstItem="WFi-DX-Fdn" firstAttribute="leading" secondItem="fdi-JS-8ry" secondAttribute="leading" constant="16" id="UU5-lA-Xfj"/>
                         <constraint firstAttribute="trailing" secondItem="WFi-DX-Fdn" secondAttribute="trailing" constant="16" id="YS6-rQ-jmd"/>
                         <constraint firstItem="9Dn-7P-jvz" firstAttribute="leading" secondItem="fdi-JS-8ry" secondAttribute="leading" constant="16" id="ZuE-pe-eNJ"/>
@@ -85,8 +118,10 @@
                         <constraint firstItem="Pti-Ib-Dkf" firstAttribute="centerX" secondItem="fdi-JS-8ry" secondAttribute="centerX" id="c6r-io-JPU"/>
                         <constraint firstAttribute="trailing" secondItem="MHP-0c-WXY" secondAttribute="trailing" constant="16" id="hgM-cX-cM7"/>
                         <constraint firstItem="548-10-NMO" firstAttribute="leading" secondItem="fdi-JS-8ry" secondAttribute="leading" id="lGb-hO-jhZ"/>
+                        <constraint firstItem="bho-ZS-NE5" firstAttribute="leading" secondItem="fdi-JS-8ry" secondAttribute="leading" constant="16" id="lwg-BZ-5Y3"/>
                         <constraint firstAttribute="trailing" secondItem="Pti-Ib-Dkf" secondAttribute="trailing" id="oci-n0-irq"/>
                         <constraint firstItem="9Dn-7P-jvz" firstAttribute="top" secondItem="Pti-Ib-Dkf" secondAttribute="bottom" constant="16" id="oo5-bV-sX4"/>
+                        <constraint firstAttribute="trailing" secondItem="bho-ZS-NE5" secondAttribute="trailing" constant="16" id="q0a-fJ-F3t"/>
                         <constraint firstItem="548-10-NMO" firstAttribute="top" secondItem="fdi-JS-8ry" secondAttribute="top" id="zxB-Cu-Yac"/>
                     </constraints>
                     <connections>

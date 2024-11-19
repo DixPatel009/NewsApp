@@ -51,4 +51,27 @@ class KeychainManager {
         return status == errSecSuccess
     }
     
+    func removeAll() -> Bool {
+        let secItemClasses: [CFString] = [
+            kSecClassGenericPassword,
+            kSecClassInternetPassword,
+            kSecClassCertificate,
+            kSecClassKey,
+            kSecClassIdentity
+        ]
+        
+        for secItemClass in secItemClasses {
+            let query: [String: Any] = [
+                kSecClass as String: secItemClass,
+                kSecAttrSynchronizable as String: kSecAttrSynchronizableAny
+            ]
+            
+            let status = SecItemDelete(query as CFDictionary)
+            if status != errSecSuccess && status != errSecItemNotFound {
+                return false
+            }
+        }
+        
+        return true
+    }
 }

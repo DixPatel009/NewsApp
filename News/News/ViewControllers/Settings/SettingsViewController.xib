@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="News" customModuleProvider="target">
             <connections>
+                <outlet property="changeAPIKeyButton" destination="KsN-B3-VsL" id="aRk-k8-wTO"/>
+                <outlet property="logoutButton" destination="pdo-Ub-10y" id="UhX-9J-22n"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,6 +34,9 @@
                             <state key="normal" title="Change API Key">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="changeAPIKeyButtonAction:" destination="-1" eventType="touchUpInside" id="jBN-ER-Chy"/>
+                            </connections>
                         </button>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdo-Ub-10y">
                             <rect key="frame" x="0.0" y="56" width="361" height="40"/>
@@ -43,6 +48,9 @@
                             <state key="normal" title="Logout">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="logoutButtonAction:" destination="-1" eventType="touchUpInside" id="1Cn-Qu-nlV"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

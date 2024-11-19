@@ -17,6 +17,8 @@ class NewsDetailViewController: UIViewController {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var navigationBarView: UIView!
     @IBOutlet weak var favouriteButton: UIButton!
+    @IBOutlet weak var openButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
     
     // MARK: - Properties
     
@@ -42,7 +44,7 @@ class NewsDetailViewController: UIViewController {
         super.viewDidLoad()
         self.setUpView()
     }
-
+    
 }
 
 // MARK: - Setup
@@ -53,6 +55,8 @@ extension NewsDetailViewController {
         self.view.backgroundColor = UI.Colors.backGroundColor
         self.navigationBarView.backgroundColor = UI.Colors.backGroundColor
         navigationController?.navigationBar.setTransparent()
+        self.openButton.roundCorners()
+        self.shareButton.roundCorners()
         self.setCustomBackButton()
         self.setUpArticaleData()
     }
@@ -64,6 +68,7 @@ extension NewsDetailViewController {
             self.titleLabel.text = model.title
             self.descriptionLabel.text = model.description
             self.contentLabel.text = model.content
+            self.openButton.isHidden = (model.url == "")
             self.setFavouriteButton()
         }
     }
@@ -73,7 +78,7 @@ extension NewsDetailViewController {
             self.favouriteButton.tintColor = viewModel.isArticleInFavorites(model) ? UI.Colors.coreBlue : .lightGray
         }
     }
-
+    
 }
 
 // MARK: - Scroll View Delegate
@@ -98,14 +103,35 @@ extension NewsDetailViewController: UIScrollViewDelegate {
 extension NewsDetailViewController {
     
     @IBAction func favouriteButtonAction(_ sender: UIButton) {
-        if let article = self.articleModel {
-            if viewModel.isArticleInFavorites(article) {
-                viewModel.removeArticleFromFavorites(article)
-            } else {
-                viewModel.saveArticleToFavorites(article)
-            }
-            self.setFavouriteButton()
+        guard let article = self.articleModel else {
+            return
         }
+        if viewModel.isArticleInFavorites(article) {
+            viewModel.removeArticleFromFavorites(article)
+        } else {
+            viewModel.saveArticleToFavorites(article)
+        }
+        self.setFavouriteButton()
+    }
+    
+    @IBAction func openButtonAction(_ sender: UIButton) {
+        guard let article = self.articleModel,
+              let url = URL(string: article.url) else {
+            return
+        }
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    @IBAction func shareButtonAction(_ sender: UIButton) {
+        guard let article = self.articleModel else {
+            return
+        }
+        let shareText = article.title + "\n\n" + article.url
+        self.presentActivityViewController(shareable: shareText)
     }
     
 }

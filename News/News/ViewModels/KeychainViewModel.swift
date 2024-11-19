@@ -27,4 +27,8 @@ class KeychainViewModel {
     func deleteData(forKey key: String) -> Bool {
         return keychainRepository.deleteData(forKey: key)
     }
+    
+    func removeAllData() -> Bool {
+        return keychainRepository.removeAllData()
+    }
 }

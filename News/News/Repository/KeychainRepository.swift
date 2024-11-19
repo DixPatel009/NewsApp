@@ -9,6 +9,7 @@ protocol KeychainRepositoryProtocol {
     func saveData(value: String, forKey key: String) -> Bool
     func getData(forKey key: String) -> String?
     func deleteData(forKey key: String) -> Bool
+    func removeAllData() -> Bool
 }
 
 class KeychainRepository: KeychainRepositoryProtocol {
@@ -22,5 +23,9 @@ class KeychainRepository: KeychainRepositoryProtocol {
 
     func deleteData(forKey key: String) -> Bool {
         return KeychainManager.shared.delete(for: key)
+    }
+    
+    func removeAllData() -> Bool {
+        return KeychainManager.shared.removeAll()
     }
 }

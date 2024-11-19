@@ -22,4 +22,19 @@ extension UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    func presentActivityViewController(shareable: String, completion: (() -> Void)? = nil) {
+        let activityViewController = GlobalFunction.shared.activityViewController(for: shareable)
+        activityViewController.completionWithItemsHandler = { activity, success, items, error in
+            completion?()
+        }
+        present(activityViewController, animated: true, completion: nil)
+    }
+    
+    func displayLogin() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        appDelegate.configureLoginViewController()
+    }
 }

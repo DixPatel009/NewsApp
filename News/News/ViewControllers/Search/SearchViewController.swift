@@ -50,6 +50,7 @@ extension SearchViewController {
     }
     
     private func setupCollectionView() {
+        self.collectionView.keyboardDismissMode = .onDrag
         self.collectionView.register(UINib(nibName: cellIdentifiers, bundle: nil), forCellWithReuseIdentifier: cellIdentifiers)
         self.collectionView.register(UINib(nibName: gridCellIdentifiers, bundle: nil), forCellWithReuseIdentifier: gridCellIdentifiers)
     }
@@ -162,17 +163,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let favoriteAction = UIContextualAction(style: .normal, title: "Favorite") { (action, view, completionHandler) in
-//            // Mark the article as favorite
-//            //self.viewModel.favoriteArticle(at: indexPath.row)
-//            completionHandler(true)
-//        }
-//        favoriteAction.backgroundColor = .systemBlue
-//        
-//        return UISwipeActionsConfiguration(actions: [favoriteAction])
-//    }
+
 }
 
 // MARK: - IBAction
@@ -216,15 +207,15 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         guard let searchText = searchBar.text,
+              searchText.isEmpty,
               searchText.count >= 2 else {
             AlertHelper.showAlert(on: self, title: Strings.AlertMessage.warning, message: Strings.AlertMessage.searchMinimumLimit)
             return
         }
-        
         self.toggleLoader(isShow: true)
         self.callFetchNewsAPI(reset: true)
-        searchBar.resignFirstResponder()
     }
     
 }

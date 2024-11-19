@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class GlobalFunction {
     
@@ -18,4 +19,12 @@ class GlobalFunction {
         return oneMonthAgo
     }
     
+    func activityViewController(for shareable: String) -> UIActivityViewController {
+        let viewController = UIActivityViewController(activityItems: [shareable], applicationActivities: nil)
+        // if any type we need to exclud then enable this...
+//        viewController.excludedActivityTypes = [
+//            .airDrop, .print, .assignToContact, .saveToCameraRoll, .addToReadingList, .postToFlickr, .postToVimeo,
+//        ]
+        return viewController
+    }
 }

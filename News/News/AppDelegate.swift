@@ -53,7 +53,7 @@ extension AppDelegate {
         self.createRootViewController(viewController: launchScreenContainer)
     }
     
-    private func configureLoginViewController() {
+    func configureLoginViewController() {
         let loginViewController = LoginViewController()
         loginViewController.loginSucessfull = { [weak self] in
             guard let strongSelf = self else { return }

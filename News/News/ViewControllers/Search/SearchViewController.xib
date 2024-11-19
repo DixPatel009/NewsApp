@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,8 +24,9 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar clipsSubviews="YES" contentMode="redraw" barStyle="blackTranslucent" searchBarStyle="minimal" placeholder="Search Text" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veu-sb-21u">
+                <searchBar clipsSubviews="YES" contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Search Text" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veu-sb-21u">
                     <rect key="frame" x="8" y="59" width="377" height="56"/>
+                    <color key="barTintColor" systemColor="labelColor"/>
                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="6Sw-b4-O8g"/>
@@ -124,5 +126,8 @@
     </objects>
     <resources>
         <image name="newsFallBack" width="64" height="64"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

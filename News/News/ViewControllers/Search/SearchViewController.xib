@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="News" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="M1q-QE-rhc" id="i6E-ae-Huu"/>
+                <outlet property="filterButton" destination="Ecd-n4-4Hg" id="cP9-dt-rcX"/>
                 <outlet property="fromDateButton" destination="mEd-Tz-OUK" id="yqS-cg-VyU"/>
                 <outlet property="layoutChangeButton" destination="ngw-5r-AXb" id="PUN-Ki-eCI"/>
                 <outlet property="noDataView" destination="PFN-U9-WRi" id="Tfl-5F-LyY"/>
@@ -73,10 +74,10 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Eo7-AR-I6a">
-                    <rect key="frame" x="16" y="123" width="361" height="40"/>
+                    <rect key="frame" x="16" y="123" width="305" height="40"/>
                     <subviews>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEd-Tz-OUK">
-                            <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="144.66666666666666" height="40"/>
                             <color key="backgroundColor" red="0.0" green="1" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -87,16 +88,17 @@
                                 <action selector="fromDateButtonAction:" destination="-1" eventType="touchUpInside" id="BNR-b8-ZCh"/>
                             </connections>
                         </button>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngw-5r-AXb">
-                            <rect key="frame" x="188.66666666666663" y="0.0" width="172.33333333333337" height="40"/>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecd-n4-4Hg">
+                            <rect key="frame" x="160.66666666666663" y="0.0" width="144.33333333333337" height="40"/>
                             <color key="backgroundColor" red="0.0" green="1" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="Switch to Grid">
+                            <state key="normal" title="Sort By">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="layoutChangeButtonAction:" destination="-1" eventType="touchUpInside" id="ify-wk-HNk"/>
+                                <action selector="filterButtonAction:" destination="-1" eventType="touchUpInside" id="zD1-4m-Rnh"/>
+                                <action selector="fromDateButtonAction:" destination="-1" eventType="touchUpInside" id="93n-MJ-PAj"/>
                             </connections>
                         </button>
                     </subviews>
@@ -104,15 +106,30 @@
                         <constraint firstAttribute="height" constant="40" id="MgF-EY-f2q"/>
                     </constraints>
                 </stackView>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngw-5r-AXb">
+                    <rect key="frame" x="337" y="123" width="40" height="40"/>
+                    <color key="backgroundColor" red="0.0" green="1" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="sLu-kl-hNj"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" image="grid">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="layoutChangeButtonAction:" destination="-1" eventType="touchUpInside" id="ify-wk-HNk"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="M1q-QE-rhc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="40A-Dm-KPq"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Eo7-AR-I6a" secondAttribute="trailing" constant="16" id="IZG-AV-atG"/>
+                <constraint firstItem="ngw-5r-AXb" firstAttribute="leading" secondItem="Eo7-AR-I6a" secondAttribute="trailing" constant="16" id="DmD-hW-dym"/>
                 <constraint firstItem="M1q-QE-rhc" firstAttribute="top" secondItem="Eo7-AR-I6a" secondAttribute="bottom" constant="16" id="Irx-JZ-IAq"/>
                 <constraint firstItem="veu-sb-21u" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="KUg-it-Zbj"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="trailing" secondItem="M1q-QE-rhc" secondAttribute="trailing" id="M6D-Ka-ICw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ngw-5r-AXb" secondAttribute="trailing" constant="16" id="Qwa-6b-Sq6"/>
                 <constraint firstItem="M1q-QE-rhc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="RTo-sM-37B"/>
                 <constraint firstItem="Eo7-AR-I6a" firstAttribute="top" secondItem="veu-sb-21u" secondAttribute="bottom" constant="8" id="SNF-h7-eim"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="leading" secondItem="M1q-QE-rhc" secondAttribute="leading" id="X9g-NW-IK1"/>
@@ -121,12 +138,15 @@
                 <constraint firstAttribute="bottom" secondItem="M1q-QE-rhc" secondAttribute="bottom" id="e8j-7d-rKr"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="top" secondItem="M1q-QE-rhc" secondAttribute="top" id="fas-Gl-ciS"/>
                 <constraint firstItem="PFN-U9-WRi" firstAttribute="bottom" secondItem="M1q-QE-rhc" secondAttribute="bottom" id="fsI-xm-WbB"/>
+                <constraint firstItem="ngw-5r-AXb" firstAttribute="top" secondItem="veu-sb-21u" secondAttribute="bottom" constant="8" id="qNv-Lm-nz9"/>
+                <constraint firstItem="M1q-QE-rhc" firstAttribute="top" secondItem="ngw-5r-AXb" secondAttribute="bottom" constant="16" id="raX-5o-0Lf"/>
                 <constraint firstItem="veu-sb-21u" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="srN-Ox-iP0"/>
             </constraints>
             <point key="canvasLocation" x="55.725190839694655" y="19.718309859154932"/>
         </view>
     </objects>
     <resources>
+        <image name="grid" width="32" height="32"/>
         <image name="news" width="256" height="256"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

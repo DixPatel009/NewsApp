@@ -12,6 +12,7 @@ protocol NewsRepositoryProtocol {
     func fetchNews(query: String,
                    fromDate: String?,
                    toDate: String?,
+                   sortBy: String?,
                    page: Int,
                    completion: @escaping (Result<([Article], URLRequest?), APIError>) -> Void)
 }
@@ -25,6 +26,7 @@ class NewsRepository: NewsRepositoryProtocol {
     func fetchNews(query: String,
                    fromDate: String?,
                    toDate: String?,
+                   sortBy: String?,
                    page: Int,
                    completion: @escaping (Result<([Article], URLRequest?), APIError>) -> Void) {
         
@@ -49,6 +51,10 @@ class NewsRepository: NewsRepositoryProtocol {
             parameters["to"] = toDate
         } else {
             parameters["to"] = Date().stringFromDate()
+        }
+        
+        if let sortFilter = sortBy {
+            parameters["sortBy"] = sortFilter.lowercased()
         }
         
         let url = API.baseURL + API.everything

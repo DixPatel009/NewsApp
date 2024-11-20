@@ -39,6 +39,7 @@ struct Strings {
         static let favoriteCount = "favoriteCount"
     }
     
+    static let done = "Done"
     static let cancel = "Cancel"
     static let ok = "Ok"
 }

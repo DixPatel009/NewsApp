@@ -27,6 +27,7 @@ class NewsViewModel {
     func fetchNews(query: String,
                    fromDate: String? = nil,
                    toDate: String? = nil,
+                   sortBy: String? = nil,
                    reset: Bool = false) {
         
         guard !isLoading else { return }  // Prevent multiple simultaneous requests
@@ -40,6 +41,7 @@ class NewsViewModel {
         newsRepository.fetchNews(query: query,
                                  fromDate: fromDate,
                                  toDate: toDate,
+                                 sortBy: sortBy,
                                  page: currentPage) { [weak self] result in
             
             guard let self = self else { return }

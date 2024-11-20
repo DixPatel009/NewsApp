@@ -6,7 +6,9 @@
 //
 
 struct API {
+    
     static let baseURL = "https://newsapi.org/v2/"
     
     static let everything = "everything"
+    
 }

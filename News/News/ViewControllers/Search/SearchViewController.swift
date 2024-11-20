@@ -14,6 +14,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var fromDateButton: UIButton!
+    @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var noDataView: UIView!
     @IBOutlet weak var layoutChangeButton: UIButton!
     
@@ -56,6 +57,7 @@ extension SearchViewController {
         self.view.backgroundColor = UI.Colors.backGroundColor
         self.layoutChangeButton.roundCorners()
         self.fromDateButton.roundCorners()
+        self.filterButton.roundCorners()
         if let monthAgoDate = GlobalFunction.shared.oneMonthAgo() {
             self.fromDateButton.setTitle(monthAgoDate.stringFromDate(), for: .normal)
         }
@@ -118,7 +120,8 @@ extension SearchViewController {
             query = searchText
         }
         
-        viewModel.fetchNews(query: query, fromDate: self.getSelectedDateInString(), reset: reset)
+        let filter: String? = self.filterButton.titleLabel?.text == "Sort By" ? nil : self.filterButton.titleLabel?.text
+        viewModel.fetchNews(query: query, fromDate: self.getSelectedDateInString(), sortBy: filter, reset: reset)
     }
     
     private func getSelectedDateInString() -> String? {
@@ -149,9 +152,10 @@ extension SearchViewController {
         let width = UIScreen.main.bounds.width / 2
         return CGSize(width: width, height: width + 120.0)
     }
+    
 }
 
-// MARK: - UICollectionView Delegate, DataSource, FlowLayout Delegate
+// MARK: - UICollectionView Delegate, DataSource & FlowLayout Delegate
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -187,8 +191,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
-                                                                 withReuseIdentifier: headerIdentifiers,
-                                                                 for: indexPath) as! CollectionHeaderView
+                                                                     withReuseIdentifier: headerIdentifiers,
+                                                                     for: indexPath) as! CollectionHeaderView
         header.searchTextLabel.text = (searchBar.text == "") ? "apple" : searchBar.text
         header.urlLabel.text = viewModel.getRequestedURL()
         return header
@@ -222,8 +226,25 @@ extension SearchViewController {
     @IBAction func layoutChangeButtonAction(_ sender: UIButton) {
         self.isGridLayout.toggle()
         self.collectionView.reloadData()
-        let buttonTitle = self.isGridLayout ? "Switch to List" : "Switch to Grid"
-        self.layoutChangeButton.setTitle(buttonTitle, for: .normal)
+        let buttonTitle = self.isGridLayout ? "list" : "grid"
+        self.layoutChangeButton.setImage(UIImage(named: buttonTitle), for: .normal)
+    }
+    
+    @IBAction func filterButtonAction(_ sender: UIButton) {
+        let options = ["None", "Relevancy", "PublishedAt", "Popularity"]
+        let bottomSheet = PickerBottomSheetViewController(options: options)
+        bottomSheet.onOptionSelected = { [weak self] selectedOption in
+            guard let self = self else { return }
+            let filterOption = (selectedOption == "None") ? "Sort By" : selectedOption
+            self.filterButton.setTitle(filterOption, for: .normal)
+            self.toggleLoader(isShow: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                guard let self = self else { return }
+                self.callFetchNewsAPI(reset: true)
+            }
+        }
+        bottomSheet.modalPresentationStyle = .overFullScreen
+        present(bottomSheet, animated: true, completion: nil)
     }
 }
 
@@ -278,11 +299,11 @@ extension SearchViewController: UIScrollViewDelegate {
 
 // MARK: - Collection Swipable Cell Extension Delegate
 extension SearchViewController: CollectionSwipableCellExtensionDelegate {
-
+    
     func isSwipable(itemAt indexPath: IndexPath) -> Bool {
         return true
     }
-
+    
     func swipableActionsLayout(forItemAt indexPath: IndexPath) -> CollectionSwipableCellLayout? {
         let article = viewModel.article(at: indexPath.item)
         let actionLayout = CollectionSwipableCellOneButtonLayout(buttonWidth: 150, insets: .zero, direction: .leftToRight)
@@ -293,10 +314,10 @@ extension SearchViewController: CollectionSwipableCellExtensionDelegate {
         actionLayout.action = { [weak self] in
             self?.handelSwipeToFavourite(atIndexPath: indexPath)
         }
-
+        
         return actionLayout
     }
-
+    
     private func handelSwipeToFavourite(atIndexPath indexPath: IndexPath) {
         let article = viewModel.article(at: indexPath.item)
         if articalViewModel.isArticleInFavorites(article) {
@@ -308,4 +329,5 @@ extension SearchViewController: CollectionSwipableCellExtensionDelegate {
         }
         self.collectionView.reloadData()
     }
+    
 }

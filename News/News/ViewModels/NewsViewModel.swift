@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class NewsViewModel {
     
@@ -15,10 +16,10 @@ class NewsViewModel {
     private var currentPage = 1
     private var isLoading = false
     private var requestURL: String?
-
+    
     var onNewsFetched: (() -> Void)?
     var onError: ((String) -> Void)?
-
+    
     init(repository: NewsRepositoryProtocol = NewsRepository()) {
         self.newsRepository = repository
     }
@@ -51,6 +52,10 @@ class NewsViewModel {
                 self.currentPage += 1  // Increment page for next fetch
                 self.onNewsFetched?()
             case .failure(let error):
+                switch error {
+                case .apiKeyNotFound(_, let request):
+                    self.requestURL = request?.url?.absoluteString
+                }
                 self.onError?(error.localizedDescription)
             }
         }

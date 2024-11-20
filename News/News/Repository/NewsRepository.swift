@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol NewsRepositoryProtocol {
     func fetchNews(query: String,
@@ -13,6 +14,10 @@ protocol NewsRepositoryProtocol {
                    toDate: String?,
                    page: Int,
                    completion: @escaping (Result<([Article], URLRequest?), APIError>) -> Void)
+}
+
+enum APIError: Error {
+    case apiKeyNotFound(String, URLRequest?)
 }
 
 class NewsRepository: NewsRepositoryProtocol {
@@ -26,7 +31,7 @@ class NewsRepository: NewsRepositoryProtocol {
         let viewModel = KeychainViewModel()
         guard let apiKey = viewModel.fetchData(forKey: Constants.KeychainKey.apiKey),
               apiKey != "" else {
-            completion(.failure(APIError.apiKeyNotFound))
+            completion(.failure(APIError.apiKeyNotFound(Strings.AlertMessage.notFoundKey, nil)))
             return
         }
         

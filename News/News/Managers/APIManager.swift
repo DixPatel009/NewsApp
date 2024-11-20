@@ -15,14 +15,6 @@ enum HTTPMethodType: String {
     case delete = "DELETE"
 }
 
-enum APIError: Error {
-    case invalidResponse
-    case noData
-    case failedRequest(Error)
-    case decodingError
-    case apiKeyNotFound
-}
-
 class APIManager {
     
     // MARK: - Properties
@@ -57,7 +49,7 @@ class APIManager {
                 case .success(let result):
                     completion(.success((result, response.request)))
                 case .failure(let error):
-                    completion(.failure(.failedRequest(error)))
+                    completion(.failure(APIError.apiKeyNotFound(error.localizedDescription, response.request)))
                 }
             }
     }

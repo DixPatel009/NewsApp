@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import Alamofire
 
 class AuthRepository {
     
     func authenticateUser(apiKey: String, completion: @escaping (Result<Bool, APIError>) -> Void) {
         
-        var parameters: [String: String] = [
+        let parameters: [String: String] = [
             "q": "query",
             "apiKey": apiKey,
             "page": "1"
@@ -26,7 +27,7 @@ class AuthRepository {
             headers: nil
         ) { (result: Result<(NewsResponse, URLRequest?), APIError>) in
             switch result {
-            case .success((let newsResponse, let request)):
+            case .success((_, _)):
                 completion(.success(true))
             case .failure(let error):
                 completion(.failure(error))

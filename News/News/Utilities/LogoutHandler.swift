@@ -10,6 +10,7 @@ class LogoutHandler {
     //Clear everything when logout
     class func logout() {
         _ = KeychainViewModel().removeAllData()
+        UserDefaultManager.shared.clearFavoriteCount()
     }
     
 }

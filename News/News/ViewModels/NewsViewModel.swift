@@ -65,5 +65,8 @@ class NewsViewModel {
         return articles[index]
     }
     
+    func getRequestedURL() -> String? {
+        return requestURL
+    }
     
 }

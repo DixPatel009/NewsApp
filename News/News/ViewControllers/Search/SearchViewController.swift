@@ -25,6 +25,7 @@ class SearchViewController: UIViewController {
     private let activityIndicator = ActivityIndicator()
     private let cellIdentifiers = NewsCollectionViewCell.identifier
     private let gridCellIdentifiers = "NewsGridCollectionViewCell"
+    private let headerIdentifiers = CollectionHeaderView.identifier
     private var swipableExtension: CollectionSwipableCellExtension?
     
     // MARK: - View LifeCycle
@@ -65,6 +66,7 @@ extension SearchViewController {
         self.collectionView.keyboardDismissMode = .onDrag
         self.collectionView.register(UINib(nibName: cellIdentifiers, bundle: nil), forCellWithReuseIdentifier: cellIdentifiers)
         self.collectionView.register(UINib(nibName: gridCellIdentifiers, bundle: nil), forCellWithReuseIdentifier: gridCellIdentifiers)
+        self.collectionView.register(UINib(nibName: headerIdentifiers, bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifiers)
         setUpSwipable()
     }
     
@@ -181,6 +183,21 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let viewController = NewsDetailViewController(article: viewModel.article(at: indexPath.item))
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                                 withReuseIdentifier: headerIdentifiers,
+                                                                 for: indexPath) as! CollectionHeaderView
+        header.searchTextLabel.text = (searchBar.text == "") ? "apple" : searchBar.text
+        header.urlLabel.text = viewModel.getRequestedURL()
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let calculatedWidth = collectionView.frame.width - 80
+        let headerHeight = viewModel.getRequestedURL()?.height(withConstrainedWidth: calculatedWidth, font: .systemFont(ofSize: 17.0)) ?? 150.0
+        return CGSize(width: collectionView.frame.width, height: headerHeight + 64)
     }
     
 }
